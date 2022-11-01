@@ -6,19 +6,14 @@
           <v-img :src="repo.owner.avatar_url"></v-img>
         </v-avatar>
         <div>
-          <div class="d-flex">
+          <div class="d-flex" style="display: block; align-items: center">
             <v-card-title
               pointer
               @click="setDetalhesRepo(repo)"
               class="text-h5 pointer"
               v-text="repo.full_name"
             ></v-card-title>
-            <v-btn
-              class="mt-3"
-              icon
-              color="grey lighten-1"
-              @click="setFavorito(repo)"
-            >
+            <v-btn icon color="grey lighten-1" @click="setFavorito(repo)">
               <v-icon>{{
                 repo.fav ? "mdi-heart" : "mdi-heart-outline"
               }}</v-icon>
@@ -67,4 +62,3 @@ export default {
   cursor: pointer;
 }
 </style>
-

@@ -6,15 +6,10 @@
           <v-img :src="repoInfo.owner.avatar_url"></v-img>
         </v-avatar>
         <div>
-          <div class="d-flex pt-5">
+          <div class="d-flex pt-5" style="display: block; align-items: center">
             <v-card-title class="text-h4" v-text="repoInfo.full_name">
             </v-card-title>
-            <v-btn
-              class="mt-5"
-              icon
-              color="grey lighten-1"
-              @click="setFavorito(repoInfo)"
-            >
+            <v-btn icon color="grey lighten-1" @click="setFavorito(repoInfo)">
               <v-icon>{{
                 repoInfo.fav ? "mdi-heart" : "mdi-heart-outline"
               }}</v-icon>
@@ -80,3 +75,4 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped></style>

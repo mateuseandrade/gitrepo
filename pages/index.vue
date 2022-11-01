@@ -2,9 +2,7 @@
   <div>
     <v-row v-if="!detalhesRepo.id" justify="center" align="center">
       <v-col cols="12" sm="8" md="6">
-        <p class="d-flex justify-center pt-4" style="color: #bdbdbd">
-          Como podemos simplificar seu código hoje?
-        </p>
+        <p>Como podemos simplificar seu código hoje?</p>
       </v-col>
       <v-col cols="8">
         <v-text-field
@@ -33,7 +31,7 @@
 
 <script>
 import axios from "axios";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "IndexPage",
@@ -89,8 +87,23 @@ export default {
   },
 };
 </script>
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .input-style {
+  display: block;
+  width: 350px;
+  margin: 0px auto;
+  padding: 10px 25px;
+  background-size: 15px 15px;
+  font-size: 16px;
+  border-radius: 5px;
   background-color: #e0e0e0;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+p {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  color: #bdbdbd;
 }
 </style>

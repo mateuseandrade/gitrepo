@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <v-row v-if="!detalhesRepo.id" justify="center" align="center" class="mt-5">
+  <div class="favoritos">
+    <v-row v-if="!detalhesRepo.id">
       <v-col cols="8" v-if="favoritos.length > 0">
-        <h2 class="mb-3" style="color: #bdbdbd">Favoritos</h2>
+        <h2>Favoritos</h2>
         <div v-for="(repo, i) in favoritos" :key="i">
           <CardRepo :isFavPage="true" :repo="repo"></CardRepo>
         </div>
       </v-col>
-      <v-col cols="8" v-else justify="center" align="center">
-        <p class="mb-3" style="color: #bdbdbd">
-          Ainda não adicionou favoritos :/
-        </p>
+      <v-col cols="8" v-else>
+        <p>Ainda não adicionou favoritos :/</p>
       </v-col>
     </v-row>
-    <v-row v-else class="pt-5" justify="center" align="center">
+    <v-row v-else>
       <v-col cols="8">
         <CardRepoInfo :repoInfo="detalhesRepo"></CardRepoInfo>
       </v-col>
@@ -42,11 +40,27 @@ export default {
     const array = JSON.parse(json);
     const favoritosStorage = Array.isArray(array) ? array : [];
     if (favoritosStorage.length > 0) {
-      this.adicionarFavoritos(favoritosStorage);
+      this.addFavorito(favoritosStorage);
     }
   },
   methods: {
-    ...mapActions(["adicionarFavoritos"]),
+    ...mapActions(["addFavorito"]),
   },
 };
 </script>
+<style lang="scss" scoped>
+.favoritos > div {
+  display: flex;
+  justify-content: center;
+}
+h2 {
+  margin-bottom: 10px;
+  color: #bdbdbd;
+}
+p {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+  color: #bdbdbd;
+}
+</style>
