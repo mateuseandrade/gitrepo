@@ -1,16 +1,16 @@
 <template>
   <div>
-    <v-card color="grey darken-1" dark class="mb-5">
-      <div class="d-flex justify-space-between">
+    <v-card color="grey darken-1" dark class="repo">
+      <div>
         <div class="d-flex">
           <v-avatar class="ma-3" size="100" tile>
             <v-img :src="repo.owner.avatar_url"></v-img>
           </v-avatar>
           <div>
-            <div class="d-flex" style="display: block; align-items: center">
+            <div class="repo-title">
               <v-card-title
                 pointer
-                @click="showModal = true"
+                @click="showModal = !showModal"
                 class="text-h5 pointer"
                 v-text="repo.full_name"
               ></v-card-title>
@@ -27,17 +27,19 @@
               class="ma-2"
               icon
               color="grey lighten-2"
-              @click="showModal = true"
+              @click="showModal = !showModal"
             >
-              <v-icon>mdi-chevron-right</v-icon>
+              <v-icon>mdi-dots-vertical</v-icon>
             </v-btn>
           </v-card-actions>
         </div>
       </div>
     </v-card>
-    <v-dialog v-model="showModal" width="1000">
-      <CardRepoInfo :repoInfo="repo"></CardRepoInfo>
-    </v-dialog>
+    <CardRepoInfo
+      :repoInfo="repo"
+      :showModal="showModal"
+      @closeModal="showModal = $event"
+    ></CardRepoInfo>
   </div>
 </template>
 
@@ -75,7 +77,18 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
+.repo {
+  margin-block: 10px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-title {
+    display: flex;
+    align-items: center;
+  }
+}
 .pointer {
   cursor: pointer;
 }

@@ -1,49 +1,51 @@
 <template>
-  <v-card color="grey darken-3" dark class="mt-5">
-    <div class="d-flex flex-no-wrap justify-space-between">
-      <div class="d-flex">
-        <v-avatar class="ma-5" size="150" tile>
-          <v-img :src="repoInfo.owner.avatar_url"></v-img>
-        </v-avatar>
+  <v-dialog v-model="showModal" persistent width="1000">
+    <v-card color="grey darken-3" dark class="repo-info">
+      <div class="repo-info-principal">
         <div>
-          <div class="d-flex pt-5" style="display: block; align-items: center">
-            <v-card-title class="text-h4" v-text="repoInfo.full_name">
-            </v-card-title>
-            <v-btn icon color="grey lighten-1" @click="setFavorito(repoInfo)">
-              <v-icon>{{
-                repoInfo.fav ? "mdi-heart" : "mdi-heart-outline"
-              }}</v-icon>
-            </v-btn>
+          <v-avatar class="ma-5" size="150" tile>
+            <v-img :src="repoInfo.owner.avatar_url"></v-img>
+          </v-avatar>
+          <div>
+            <div class="d-flex pt-5 align-center">
+              <v-card-title class="text-h4" v-text="repoInfo.full_name">
+              </v-card-title>
+              <v-btn icon color="grey lighten-1" @click="setFavorito(repoInfo)">
+                <v-icon>{{
+                  repoInfo.fav ? "mdi-heart" : "mdi-heart-outline"
+                }}</v-icon>
+              </v-btn>
+            </div>
+            <v-card-subtitle
+              class="pt-3"
+              v-text="repoInfo.description"
+            ></v-card-subtitle>
           </div>
-          <v-card-subtitle
-            class="pt-3"
-            v-text="repoInfo.description"
-          ></v-card-subtitle>
+        </div>
+        <div style="align-self: start">
+          <v-card-actions>
+            <v-btn class="ma-2" icon color="grey lighten-2" @click="close()">
+              <v-icon>mdi-close-outline</v-icon>
+            </v-btn>
+          </v-card-actions>
         </div>
       </div>
-      <div style="align-self: start">
-        <v-card-actions>
-          <v-btn class="ma-2" text icon color="grey lighten-2">
-            <v-icon>mdi-arrow-left-circle</v-icon>
-          </v-btn>
-        </v-card-actions>
+      <div class="repo-info-option">
+        <div>
+          <v-icon>mdi-star</v-icon>
+          <div>{{ repoInfo.stargazers_count }}</div>
+        </div>
+        <div>
+          <v-icon>mdi-eye</v-icon>
+          <div>{{ repoInfo.watchers_count }}</div>
+        </div>
+        <div>
+          <v-icon>mdi-calendar-range</v-icon>
+          <div>{{ updatedAt }}</div>
+        </div>
       </div>
-    </div>
-    <div class="d-flex pt-4 pb-4 flex-no-wrap justify-space-around">
-      <div class="d-flex">
-        <v-icon>mdi-star</v-icon>
-        <div class="pl-5">{{ repoInfo.stargazers_count }}</div>
-      </div>
-      <div class="d-flex">
-        <v-icon>mdi-eye</v-icon>
-        <div class="pl-5">{{ repoInfo.watchers_count }}</div>
-      </div>
-      <div class="d-flex">
-        <v-icon>mdi-calendar-range</v-icon>
-        <div class="pl-5">{{ updatedAt }}</div>
-      </div>
-    </div>
-  </v-card>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 import { mapActions } from "vuex";
@@ -52,6 +54,9 @@ export default {
   props: {
     repoInfo: {
       type: Object,
+    },
+    showModal: {
+      type: Boolean,
     },
   },
 
@@ -68,8 +73,39 @@ export default {
 
   methods: {
     ...mapActions(["setFavorito"]),
+
+    close() {
+      this.$emit("closeModal", false);
+    },
   },
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="scss" scoped>
+.repo-info {
+  margin-top: 10px;
+
+  &-principal {
+    display: flex;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+    }
+  }
+
+  &-option {
+    display: flex;
+    padding: 15px 0px;
+    justify-content: space-around;
+
+    div {
+      display: flex;
+
+      div {
+        padding-left: 8px;
+      }
+    }
+  }
+}
+</style>
