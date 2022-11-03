@@ -23,13 +23,7 @@
       </div>
       <div style="align-self: start">
         <v-card-actions>
-          <v-btn
-            class="ma-2"
-            text
-            icon
-            color="grey lighten-2"
-            @click="setDetalhesRepo({})"
-          >
+          <v-btn class="ma-2" text icon color="grey lighten-2">
             <v-icon>mdi-arrow-left-circle</v-icon>
           </v-btn>
         </v-card-actions>
@@ -60,6 +54,7 @@ export default {
       type: Object,
     },
   },
+
   computed: {
     updatedAt() {
       let data = this.repoInfo.updated_at;
@@ -70,9 +65,11 @@ export default {
       return ("0" + dia).slice(-2) + "/" + ("0" + mes).slice(-2) + "/" + ano;
     },
   },
+
   methods: {
-    ...mapActions(["setDetalhesRepo", "setFavorito"]),
+    ...mapActions(["setFavorito"]),
   },
 };
 </script>
-<style lang="scss" scoped></style>
+
+<style lang="css" scoped></style>

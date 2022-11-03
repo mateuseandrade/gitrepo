@@ -1,15 +1,10 @@
 export const state = () => ({
   reposFav: [],
-  repoInfo: {},
-  repoInfo: {},
 });
 
 export const getters = {
   favoritos(state) {
     return state.reposFav;
-  },
-  detalhesRepo(state) {
-    return state.repoInfo;
   },
 };
 
@@ -25,9 +20,6 @@ export const mutations = {
   ADD_FAVORITO(state, payload) {
     state.reposFav = payload;
   },
-  SET_DETALHES_REPO(state, payload) {
-    state.repoInfo = payload;
-  },
 };
 
 export const actions = {
@@ -36,8 +28,5 @@ export const actions = {
   },
   addFavorito({ commit }, payload) {
     commit("ADD_FAVORITO", payload);
-  },
-  setDetalhesRepo({ commit }, payload) {
-    commit("SET_DETALHES_REPO", payload);
   },
 };
